@@ -2,6 +2,7 @@
 # Source: http://www.htpcguides.com
 # Adapted from https://github.com/blindpet/piavpn-portforward/
 # Author: Mike
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 USERNAME=piauser
 PASSWORD=piapass

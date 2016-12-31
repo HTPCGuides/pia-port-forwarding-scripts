@@ -11,8 +11,8 @@ VPNLOCALIP=$(ifconfig $VPNINTERFACE | awk '/inet / {print $2}' | awk 'BEGIN { FS
 CURL_TIMEOUT=5
 CLIENT_ID=$(uname -v | sha1sum | awk '{ print $1 }')
 
-TRANSUSER=transuser
-TRANSPASS=transpass
+TRANSUSER=user
+TRANSPASS=pass
 TRANSHOST=localhost
 
 #get VPNIP

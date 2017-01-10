@@ -11,7 +11,7 @@ VPNLOCALIP=$(ifconfig $VPNINTERFACE | awk '/inet / {print $2}' | awk 'BEGIN { FS
 CURL_TIMEOUT=5
 CLIENT_ID=$(uname -v | sha1sum | awk '{ print $1 }')
 
-# set to 1 if using VPN Splut tunnel
+# set to 1 if using VPN Split Tunnel
 SPLITVPN=""
 
 TRANSUSER=user

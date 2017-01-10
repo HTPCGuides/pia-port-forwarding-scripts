@@ -11,6 +11,9 @@ VPNLOCALIP=$(ifconfig $VPNINTERFACE | awk '/inet / {print $2}' | awk 'BEGIN { FS
 CURL_TIMEOUT=5
 CLIENT_ID=$(uname -v | sha1sum | awk '{ print $1 }')
 
+# set to 1 if using VPN Splut tunnel
+SPLITVPN=""
+
 TRANSUSER=user
 TRANSPASS=pass
 TRANSHOST=localhost
@@ -25,13 +28,16 @@ PORTFORWARDJSON=$(curl -m $CURL_TIMEOUT --silent --interface $VPNINTERFACE  'htt
 PORT=$(echo $PORTFORWARDJSON | awk 'BEGIN{r=1;FS="{|:|}"} /port/{r=0; print $3} END{exit r}')
 echo $PORT  
 
+#change firewall rules if SPLITVPN is set to 1
+if [ "$SPLITVPN" -eq "1" ]; then
 #change firewall rules if necessary
-IPTABLERULETWO=$(iptables -L INPUT -n --line-numbers | grep -E "2.*reject-with icmp-port-unreachable" | awk '{ print $8 }')
-if [ -z $IPTABLERULETWO ]; then
-    sudo iptables -D INPUT 2
-    sudo iptables -I INPUT 2 -i $VPNINTERFACE -p tcp --dport $PORT -j ACCEPT
-else
-    sudo iptables -I INPUT 2 -i $VPNINTERFACE -p tcp --dport $PORT -j ACCEPT
+    IPTABLERULETWO=$(iptables -L INPUT -n --line-numbers | grep -E "2.*reject-with icmp-port-unreachable" | awk '{ print $8 }')
+    if [ -z $IPTABLERULETWO ]; then
+        sudo iptables -D INPUT 2
+        sudo iptables -I INPUT 2 -i $VPNINTERFACE -p tcp --dport $PORT -j ACCEPT
+    else
+        sudo iptables -I INPUT 2 -i $VPNINTERFACE -p tcp --dport $PORT -j ACCEPT
+    fi
 fi
 
 #change transmission port on the fly

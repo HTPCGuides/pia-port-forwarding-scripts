@@ -2,6 +2,9 @@
 # Source: http://www.htpcguides.com
 # Adapted from https://github.com/blindpet/piavpn-portforward/
 # Author: Mike
+# Based on https://github.com/crapos/piavpn-portforward
+
+# Set path for root Cron Job
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 USERNAME=piauser

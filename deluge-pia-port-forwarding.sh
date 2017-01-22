@@ -2,6 +2,7 @@
 # Source: http://www.htpcguides.com
 # Adapted from https://github.com/blindpet/piavpn-portforward/
 # Author: Mike
+# Based on https://github.com/crapos/piavpn-portforward
 
 USERNAME=piauser
 PASSWORD=piapass

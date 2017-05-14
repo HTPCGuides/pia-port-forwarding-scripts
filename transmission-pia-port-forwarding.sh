@@ -51,7 +51,7 @@ REGEX='X-Transmission-Session-Id\: (\w*)'
 if [[ $CURLOUT =~ $REGEX ]]; then
     SESSIONID=${BASH_REMATCH[1]}
 else
-h    exit 1
+    exit 1
 fi
 
 DATA='{"method": "session-set", "arguments": { "peer-port" :'$PORT' } }' 

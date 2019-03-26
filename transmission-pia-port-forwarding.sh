@@ -99,6 +99,6 @@ else
     exit 1
 fi
 
-DATA='{ "method": "session-set", "arguments": { "peer-port" :'$OPEN_PORT' } }' 
+DATA='{ "method": "session-set", "arguments": { "peer-port" :'"$OPEN_PORT"' } }' 
  
-curl -u $TRANSUSER:$TRANSPASS http://${TRANSHOST}:9091/transmission/rpc -d "$DATA" -H "X-Transmission-Session-Id: $SESSIONID"
+curl --user $TRANSUSER:$TRANSPASS 'http://${TRANSHOST}:9091/transmission/rpc' --data "$DATA" --header "X-Transmission-Session-Id: $SESSIONID"
